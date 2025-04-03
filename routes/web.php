@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return redirect()->route('contacts.index');
+    // Retorna a view diretamente em vez de redirecionar
+    $contacts = App\Models\Contact::orderBy('name')->paginate(10);
+    return view('contacts.index', compact('contacts'));
 });
 
 // Rotas de autenticação
